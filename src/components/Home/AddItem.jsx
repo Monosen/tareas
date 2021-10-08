@@ -11,10 +11,8 @@ const AddItem = ({ handleAddItems, setTitle, titletDup }) => {
 				/>
 				<input className="px-5 py-1 rounded" type="submit" value="ADD" />
 			</form>
-			{titletDup ? (
-				<p className="text-xl capitalize">nombre repetido</p>
-			) : (
-				console.log("new text")
+			{titletDup && (
+				<p className="text-xl capitalize text-third">nombre repetido</p>
 			)}
 		</>
 	);
