@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //Components
 import AddItem from "../../components/Home/AddItem";
@@ -30,7 +30,20 @@ const Home = () => {
 				]);
 			}
 		}
+		setTitle("");
 	};
+
+	useEffect(() => {
+		if (JSON.parse(localStorage.getItem("AllItems"))) {
+			setAllList(JSON.parse(localStorage.getItem("AllItems")));
+		} else {
+			setAllList(localStorage.setItem("AllItems", JSON.stringify([])));
+		}
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem("AllItems", JSON.stringify(allList));
+	}, [allList]);
 
 	const handleAll = () => {
 		setOption(0);
@@ -103,6 +116,7 @@ const Home = () => {
 						handleAddItems={handleAddItems}
 						setTitle={setTitle}
 						titletDup={titletDup}
+						title={title}
 					/>
 				</div>
 
@@ -126,9 +140,9 @@ const Home = () => {
 						Recycle Bin
 					</button>
 				</div>
-				<div className="bg-first p-4 mt-5">
+				<div className="bg-first p-4 mt-5 w-9/12">
 					<div className="mt-5 overflow-auto h-80">
-						{option === 0
+						{option === 0 && allList?.length > 0
 							? allList.map(
 									(all, index) =>
 										!all.recycle && (
@@ -142,7 +156,7 @@ const Home = () => {
 											/>
 										)
 							  )
-							: option === 1
+							: option === 1 && allList?.length > 0
 							? allList.map(
 									(all, index) =>
 										!all.recycle &&
@@ -157,7 +171,7 @@ const Home = () => {
 											/>
 										)
 							  )
-							: option === 2
+							: option === 2 && allList?.length > 0
 							? allList.map(
 									(all, index) =>
 										!all.recycle &&
@@ -173,6 +187,7 @@ const Home = () => {
 										)
 							  )
 							: option === 3 &&
+							  allList?.length > 0 &&
 							  allList.map(
 									(all, index) =>
 										all.recycle && (

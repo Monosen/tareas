@@ -45,13 +45,8 @@ const AllItems = ({
 		handleItemsDetele(name);
 	};
 
-	// const handleItemsDelete = () => {
-	// 	handleItemsDetele(name);
-	// };
-
-	// console.log(status);
 	return (
-		<div className="bg-white rounded px-2 py-3 flex justify-between items-center mb-4 w-96">
+		<div className="bg-white rounded px-2 py-3 flex justify-between items-center mb-4 w-full">
 			<div className="inline-flex">
 				<button className="mr-3" onClick={handleCheck}>
 					{btCheck ? (
