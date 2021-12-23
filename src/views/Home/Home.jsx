@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { Title } from "../../components/Custom/Title/Title";
 
 //Components
 import AddItem from "../../components/Home/AddItem";
 import AllItems from "../../components/Home/AllItems";
+
+//Styles
+import "./Home.styles.css";
 
 const Home = () => {
 	const [title, setTitle] = useState("");
@@ -106,42 +110,21 @@ const Home = () => {
 		setAllList(result);
 	};
 
-	// console.log(allList);
-
 	return (
-		<div className="bg-second">
-			<div className="min-h-screen flex pt-28 items-center flex-col">
-				<div className="bg-first p-4">
+		<main className="bg-box min-h-screen flex pt-28 items-center flex-col">
+			<Title data={"To Do"} />
+			<div className="container px-5 mx-auto mt-5 w-full max-w-prose">
+				<header className="bg-first px-2 py-2 rounded-lg glassmorphism">
 					<AddItem
 						handleAddItems={handleAddItems}
 						setTitle={setTitle}
 						titletDup={titletDup}
 						title={title}
 					/>
-				</div>
+				</header>
 
-				<div className="flex m-3">
-					<button onClick={handleAll} className="p-4 text-white mr-4 bg-first">
-						All
-					</button>
-					<button
-						onClick={handleComplete}
-						className="p-4 text-white mr-4 bg-first"
-					>
-						Complete
-					</button>
-					<button
-						onClick={handleIncomplete}
-						className="p-4 text-white mr-4 bg-first"
-					>
-						Incomplete
-					</button>
-					<button onClick={handleRecycle} className="p-4 text-white bg-first">
-						Recycle Bin
-					</button>
-				</div>
-				<div className="bg-first p-4 mt-5 w-9/12">
-					<div className="mt-5 overflow-auto h-80">
+				<main className="bg-first mt-5 rounded-lg overflow-hidden glassmorphism ">
+					<section className="overflow-auto max-h-80 scrollbar">
 						{option === 0 && allList?.length > 0
 							? allList.map(
 									(all, index) =>
@@ -203,10 +186,34 @@ const Home = () => {
 											/>
 										)
 							  )}
+					</section>
+
+					<div className="grid grid-cols-2 border-white border-t-2 font-josefin gap-x-2 text-sm">
+						<button onClick={handleAll} className="p-4 text-white uppercase">
+							All
+						</button>
+						<button
+							onClick={handleComplete}
+							className="p-4 text-white uppercase"
+						>
+							Complete
+						</button>
+						<button
+							onClick={handleIncomplete}
+							className="p-4 text-white uppercase"
+						>
+							Incomplete
+						</button>
+						<button
+							onClick={handleRecycle}
+							className="p-4 text-white uppercase"
+						>
+							Recycle Bin
+						</button>
 					</div>
-				</div>
+				</main>
 			</div>
-		</div>
+		</main>
 	);
 };
 

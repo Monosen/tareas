@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 
-//Img
-import check from "../../img/check.svg";
-import checkTwo from "../../img/checkTwo.svg";
-import trash from "../../img/trash.svg";
-import back from "../../img/back.svg";
-import close from "../../img/close.svg";
+//Styles
+import "./AllItems.styles.css";
 
-const AllItems = ({
-	name,
-	handleItemsStatus,
-	handleItemsRecycle,
-	status,
-	recycle,
-	handleItemsBack,
-	handleItemsDetele,
-}) => {
+//Icons
+import {
+	RiCheckboxBlankCircleLine,
+	RiCheckboxCircleFill,
+	RiCloseFill,
+	RiArrowGoBackFill,
+} from "react-icons/ri";
+
+import { FiTrash2 } from "react-icons/fi";
+
+const AllItems = (props) => {
+	const {
+		name,
+		handleItemsStatus,
+		handleItemsRecycle,
+		status,
+		recycle,
+		handleItemsBack,
+		handleItemsDetele,
+	} = props;
+
 	const [btCheck, setBtCheck] = useState(status);
 	const [btRecycle, setBtRecycle] = useState(false);
 
@@ -27,7 +35,7 @@ const AllItems = ({
 		}
 		setBtCheck(!btCheck);
 	};
-	// console.log(btCheck);
+
 	const handleRecycle = () => {
 		if (btRecycle) {
 			handleItemsRecycle(false, name);
@@ -46,13 +54,13 @@ const AllItems = ({
 	};
 
 	return (
-		<div className="bg-white rounded px-2 py-3 flex justify-between items-center mb-4 w-full">
+		<div className="glassmorphism_item px-2 py-4 flex justify-between items-center w-full border-t-2 border-white text-white">
 			<div className="inline-flex">
 				<button className="mr-3" onClick={handleCheck}>
 					{btCheck ? (
-						<img src={checkTwo} alt={name} />
+						<RiCheckboxCircleFill className="text-2xl" />
 					) : (
-						<img src={check} alt={name} />
+						<RiCheckboxBlankCircleLine className="text-2xl" />
 					)}
 				</button>
 				<p className={btCheck ? "line-through" : "block"}>{name}</p>
@@ -60,19 +68,17 @@ const AllItems = ({
 			<div className="flex items-center">
 				{recycle ? (
 					<button className="mr-4" onClick={handleBack}>
-						<img src={back} alt={name} />
+						<RiArrowGoBackFill className="text-2xl" />
 					</button>
 				) : (
-					<button onClick={status ? handleRecycle : console.log()}>
-						<img src={trash} alt={name} />
+					<button onClick={status && handleRecycle}>
+						<FiTrash2 className="text-3xl" />
 					</button>
 				)}
-				{recycle ? (
+				{recycle && (
 					<button onClick={handleDelete}>
-						<img src={close} alt={name} />
+						<RiCloseFill className="text-3xl" />
 					</button>
-				) : (
-					<div></div>
 				)}
 			</div>
 		</div>
